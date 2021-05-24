@@ -44,9 +44,9 @@
 ```cpp
 // инициализация наследуется от GyverMotor
 // варианты инициализации в зависимости от типа драйвера:
-// AccelMotor motor(DRIVER2WIRE, dig_pin, PWM_pin, level)
-// AccelMotor motor(DRIVER3WIRE, dig_pin_A, dig_pin_B, PWM_pin, level)
-// AccelMotor motor(RELAY2WIRE, dig_pin_A, dig_pin_B, level)
+AccelMotor motor(DRIVER2WIRE, dig_pin, PWM_pin, level)
+AccelMotor motor(DRIVER3WIRE, dig_pin_A, dig_pin_B, PWM_pin, level)
+AccelMotor motor(RELAY2WIRE, dig_pin_A, dig_pin_B, level)
 /*
   DRIVER2WIRE - двухпроводной драйвер (направление + ШИМ)
   DRIVER3WIRE - трёхпроводной драйвер (два пина направления + ШИМ)
