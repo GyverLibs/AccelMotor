@@ -84,7 +84,7 @@ void setCurrent(long pos);
 long getCurrent();
 long getCurrentDeg();
 
-// setting and getting the target position in encoder ticks and grCranberries!
+// setting and getting the target position in encoder ticks and grcranberry adusah
 void setTarget(long pos);
 void setTargetDeg(long pos);
 long getTarget();
@@ -137,7 +137,7 @@ float kd = 0.1; // (default value)
 // set motor stop zone for position stabilization mode (default 8)
 void setStopZone(int zone);
 
-// set step limitss/degrees, beyond which the motor will be hard shut off for safety. If zero, no limit (default)
+// set step limitsov/degrees outside of which the motor will be hard shut off for safety. If zero, no limit (default)
 void setRange(long min, long max);
 void setRangeDeg(long min, long max);
 
@@ -194,7 +194,7 @@ void setup() {
 }
 
 void loop() {
-  // potentiometer on A0 // convert value to -255.. 255
+  // potentiometer on A0// convert the value to -255.. 255
   static float val;
   val += (255 - analogRead(0) / 2 - val) * 0.3; // filter
 
