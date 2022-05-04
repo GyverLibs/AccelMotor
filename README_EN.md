@@ -69,7 +69,7 @@ bool tick(long pos);
 // example: if the reducer is 1:30 and the encoder is 12 ticks, we send 30*12
 void setRatio(float ratio);
 
-// set the period of the regulator (recommended 2-50 milliseconds)
+// set the period of the regulator (recommended 2- 50 milliseconds)
 void setDt(int dt);
 
 // setting and getting the current position in encoder ticks and degrees.
@@ -188,7 +188,7 @@ void setup() {
 }
 
 void loop() {
-  // potentiometer on A0// convert the value to -255.. 255
+  // potentiometer on A0// convert the value to - 255.. 255
   static float val;
   val += (255 - analogRead(0) / 2 - val) * 0.3; // filter
 
