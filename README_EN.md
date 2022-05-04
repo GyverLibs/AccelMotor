@@ -1,3 +1,5 @@
+This is an automatic translation, may be incorrect in some places. See sources and examples!
+
 # AccelMotor
 Library for advanced control and stabilization of a motor with an encoder for Arduino
 - Inherits all chips from the GyverMotor library (support for different drivers and modes)
