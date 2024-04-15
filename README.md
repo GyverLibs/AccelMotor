@@ -1,6 +1,5 @@
 [![latest](https://img.shields.io/github/v/release/GyverLibs/AccelMotor.svg?color=brightgreen)](https://github.com/GyverLibs/AccelMotor/releases/latest/download/AccelMotor.zip)
 [![PIO](https://badges.registry.platformio.org/packages/gyverlibs/library/AccelMotor.svg)](https://registry.platformio.org/libraries/gyverlibs/AccelMotor)
-[![arduino-library](https://www.ardu-badge.com/badge/AccelMotor.svg?)](https://www.ardu-badge.com/AccelMotor)
 [![PIO](https://badges.registry.platformio.org/packages/gyverlibs/library/AccelMotor.svg)](https://registry.platformio.org/libraries/gyverlibs/AccelMotor)
 [![arduino-library](https://www.ardu-badge.com/badge/AccelMotor.svg?)](https://www.ardu-badge.com/AccelMotor)
 [![Foo](https://img.shields.io/badge/Website-AlexGyver.ru-blue.svg?style=flat-square)](https://alexgyver.ru/)
