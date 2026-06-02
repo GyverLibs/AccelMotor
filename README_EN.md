@@ -1,268 +1,274 @@
-This is an automatic translation, may be incorrect in some places. See sources and examples!
+This is an automatic translation and may be incorrect in some places. See the source README and examples for authoritative information.
 
-# Accelmotor
-Library for expanded control and stabilization of the engine with encoder for Arduino
-- inherits all the chips from the Gyvermotor library (support for different drivers and modes)
-- mode of maintaining feedback speed
-- turning mode to a given angle with feedback
-- custom -made pid regulator coefficients
-- restriction of acceleration and speed
-- The library accepts any type of feedback: encoder, potentiometer, etc.
-- support for motor-tractors, tuning the transfer of encoder
-- the regulator takes into account the "dead zone" of the motor
-- all functions work in degrees and Tiki Encoder
+[![latest](https://img.shields.io/github/v/release/GyverLibs/AccelMotor.svg?color=brightgreen)](https://github.com/GyverLibs/AccelMotor/releases/latest/download/AccelMotor.zip)
+[![PIO](https://badges.registry.platformio.org/packages/gyverlibs/library/AccelMotor.svg)](https://registry.platformio.org/libraries/gyverlibs/AccelMotor)
+[![Foo](https://img.shields.io/badge/Website-AlexGyver.ru-blue.svg?style=flat-square)](https://alexgyver.ru/)
+[![Foo](https://img.shields.io/badge/%E2%82%BD%24%E2%82%AC%20%D0%9F%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%B0%D1%82%D1%8C-%D0%B0%D0%B2%D1%82%D0%BE%D1%80%D0%B0-orange.svg?style=flat-square)](https://alexgyver.ru/support_alex/)
+[![Foo](https://img.shields.io/badge/README-ENGLISH-blueviolet.svg?style=flat-square)](https://github-com.translate.goog/GyverLibs/AccelMotor?_x_tr_sl=ru&_x_tr_tl=en)  
 
-## compatibility
-Compatible with all arduino platforms (used arduino functions)
+[![Foo](https://img.shields.io/badge/ПОДПИСАТЬСЯ-НА%20ОБНОВЛЕНИЯ-brightgreen.svg?style=social&logo=telegram&color=blue)](https://t.me/GyverLibs)
 
-### Documentation
-There is [extended documentation] to the library (https://alexgyver.ru/accellemotor/)
+# AccelMotor
+Advanced motor control and stabilization library with encoder for Arduino
+- Inherits all chips from the GyverMotor library (support for different drivers and modes)
+- Speed mode with feedback
+- Turning mode at a given angle with feedback
+- Adjustable PID coefficients of the regulator
+- Limitation of acceleration and speed
+- The library receives any type of feedback: encoder, potentiometer, etc.
+- Support for motor-reductors, setting the transmission ratio of the encoder
+- The regulator takes into account the dead zone of the engine
+- All functions work in degrees and "ticks" of the encoder
 
-## Content
-- [installation] (# Install)
-- [initialization] (#init)
-- [use] (#usage)
-- [Example] (# Example)
-- [versions] (#varsions)
-- [bugs and feedback] (#fedback)
+### Compatibility
+Compatible with all Arduino platforms (Arduino features are used)
 
-<a id="install"> </a>
+### Documentation.
+There's a library[extended documentation](https://alexgyver.ru/accelmotor/)
+
+## Contents
+- [Installation](#install)
+- [Initialization](#init)
+- [Use of use](#usage)
+- [Example](#example)
+- [Versions](#versions)
+- [Bugs and feedback](#feedback)
+
+<a id="install"></a>
 ## Installation
-- The library can be found by the name ** Accelmotor ** and installed through the library manager in:
-    - Arduino ide
-    - Arduino ide v2
-    - Platformio
-- [download the library] (https://github.com/gyverlibs/accellmotor/archive/refs/heads/main.zip) .Zip archive for manual installation:
-    - unpack and put in * C: \ Program Files (X86) \ Arduino \ Libraries * (Windows X64)
-    - unpack and put in * C: \ Program Files \ Arduino \ Libraries * (Windows X32)
-    - unpack and put in *documents/arduino/libraries/ *
-    - (Arduino id) Automatic installation from. Zip: * sketch/connect the library/add .Zip library ... * and specify downloaded archive
-- Read more detailed instructions for installing libraries [here] (https://alexgyver.ru/arduino-first/#%D0%A3%D1%81%D1%82%D0%B0%BD%D0%BE%BE%BE%BED0%B2%D0%BA%D0%B0_%D0%B1%D0%B8%D0%B1%D0%BB%D0%B8%D0%BE%D1%82%D0%B5%D0%BA)
+- The library can be found under the name **AccelMotor** and installed through the library manager in:
+    - Arduino IDE
+    - Arduino IDE v2
+    - PlatformIO
+- [Download the library](https://github.com/GyverLibs/AccelMotor/archive/refs/heads/main.zip).zip archive for manual installation:
+    - Unpack and put in *C:\Program Files (x86)\Arduino\libraries* (Windows x64)
+    - Unpack and put in *C:\Program Files\Arduino\libraries* (Windows x32)
+    - Unpack and put in *Documents/Arduino/libraries/ *
+    - (Arduino IDE) Automatic installation from .zip: *Sketch/Connect library/Add .ZIP library...* and specify downloaded archive
+- Read more detailed instructions for installing libraries[here](https://alexgyver.ru/arduino-first/#%D0%A3%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0_%D0%B1%D0%B8%D0%B1%D0%BB%D0%B8%D0%BE%D1%82%D0%B5%D0%BA)
 ### Update
-- I recommend always updating the library: errors and bugs are corrected in the new versions, as well as optimization and new features are added
-- through the IDE library manager: find the library how to install and click "update"
-- Manually: ** remove the folder with the old version **, and then put a new one in its place.“Replacement” cannot be done: sometimes in new versions, files that remain when replacing are deleted and can lead to errors!
+- I recommend always updating the library: new versions fix errors and bugs, as well as optimize and add new features.
+- Through the library manager IDE: find the library as when installing and click "Update"
+- Manually: **Delete the folder with the old version** and then put the new one in its place. “Replacement” can not be done: sometimes new versions delete files that will remain when replaced and can lead to errors!
 
-
-<a id="init"> </a>
-## initialization
-`` `CPP
-// initialization inherited from gyvermotor
-// Prevention options depending on the type of driver:
-Accelmotor Motor (Driver2wire, Dig_pin, Pwm_pin, Level);
-Accelmotor Motor (Driver3wire, Dig_pin_a, Dig_pin_b, Pwm_pin, Level);
-Accelmotor Motor (Relay2wire, Dig_pin_a, Dig_pin_b, Level);
+<a id="init"></a>
+## Initialization
+```cpp
+// Initialization inherited from GyverMotor
+// Initialization options depending on the type of driver:
+AccelMotor motor(DRIVER2WIRE, dig_pin, PWM_pin, level);
+AccelMotor motor(DRIVER3WIRE, dig_pin_A, dig_pin_B, PWM_pin, level);
+AccelMotor motor(RELAY2WIRE, dig_pin_A, dig_pin_B, level);
 /*
-  Driver2wire - two -wire driver (direction + ShIM)
-  Driver3wire - a three -wire driver (two directions + shim)
-  Relay2wire - Relay as a driver (two pins of the direction)
+  DRIVER2WIRE - двухпроводной драйвер (направление + ШИМ)
+  DRIVER3WIRE - трёхпроводной драйвер (два пина направления + ШИМ)
+  RELAY2WIRE - реле в качестве драйвера (два пина направления)
 
-  dig_pin, dig_pin_a, dig_pin_b - any digital PIN MK
-  Pwm_pin - any shim pin mk
-  Level - Low / High - Driver level.If, with an increase in speed, the motor, on the contrary, slows down, change the level
+  dig_pin, dig_pin_A, dig_pin_B - любой цифровой пин МК
+  PWM_pin - любой ШИМ пин МК
+  level - LOW / HIGH - уровень драйвера. Если при увеличении скорости мотор наоборот тормозит - смени уровень
 */
-`` `
+```
 
-<a id="usage"> </a>
-## Usage
-`` `CPP
-// controls the motor.Call as often as possible (inside the timer with a period dt)
-// accepts the current position of VALa Motor (according to the encoder)
-// Returns True if the motor still moves towards the goal
-Bool Tick (Long Pos);
+<a id="usage"></a>
+## Use of use
+```cpp
+// It controls the engine. Call as often as possible (internal timer with period dt)
+// takes the current position of the motor shaft (according to the encoder)
+// returns true if the motor is still moving
+bool tick(long pos);
 
-// Installation of the gear ratio of the gearbox and encoder
-// Example: if the gearbox is 1:30 - we transfer to function 30
-// Example: if the gearbox is 1:30 and an encoder for 12 ticks - we transfer 30*12
-VOID setratio (Float Ratio);
+// gearing
+// Example: if the gearbox is 1:30, transmit to the function 30
+// Example: if the reducer 1:30 and encoder for 12 ticks - transmit 30 *12
+void setRatio(float ratio);	
 
-// Installation of the regulator period (2-50 milliseconds are recommended)
-VOID Setdt (Int DT);
+// setting the regulator period (recommended 2-50 milliseconds)
+void setDt(int dt);
 
-// Installation and receipt of the current position in the tics of encoder and degrees.
-// setcurrent (POS) is equivalent to call Tick (POS) and, in principle, is not needed!
-VOID setcurrent (LONG POS);
-Long getcurrent ();
-Long getcurrentdeg ();
+// setting and obtaining the current position in encoder tics and degrees.
+// SetCurrent(pos) is tantamount to calling a tick(pos) and is not required in principle!
+void setCurrent(long pos);
+long getCurrent();
+long getCurrentDeg();
 
-// Installation and receipt of the target position in the tics of encoder and degrees
-VOID settarget (LONG POS);
-VOID settargetdeg (Long POS);
-Long gettarget ();
-Long gettargetdeg ();
+// setting and obtaining a target position in encoder tics and degrees
+void setTarget(long pos);
+void setTargetDeg(long pos);
+long getTarget();
+long getTargetDeg();
 
-// Installation of maximum speed in ticks of encoder/second and degrees/second
-VOID SetmaxSpeed (Intsed);
-VOID setmaxSpeedDeg (int spEED);
+// setting the maximum speed in encoder tics/second and degrees/second
+void setMaxSpeed(int speed);
+void setMaxSpeedDeg(int speed);
 
-// Installation of acceleration ticks of encoder and degrees per second
-VOID setaccoleration (Intscel);
-VOID setaccolerationdeg (intactel);
+// acceleration of encoder tics and degrees per second
+void setAcceleration(int accel);
+void setAccelerationDeg(int accel);
 
-// Installation and receipt of targeted speed in the ticks of encoder/second and degrees/second
-VOID settargetSpeed (int sponeD);
-VOID settargetSpeeddeg
-IntargetSpeed ();
-IntargetSpeedDeg ();
+// setting and obtaining the target speed in encoder tics/second and degrees/second
+void setTargetSpeed(int speed);
+void setTargetSpeedDeg(int speed);
+int getTargetSpeed();
+int getTargetSpeedDeg();
 
-// Get the current speed in ticks of encoder/second and degrees/second
-Intspeed ();
-Intspeeddeg ();
+// get the current speed in encoder tics/second and degrees/second
+int getSpeed();
+int getSpeedDeg();	
 
-// Get the current PWM signal (Float from PID of the regulator)
-Float Getduuty ();
+// receive the current PWM signal (float from the PID regulator)
+float getDuty();
 
-// manual installation of the operating mode
-// IDLE_RUN - Tick () does not control the motor.Can be used for debugging
-// Accel_pos - Tick () works in a smooth follow -up mode to the target corner
-// pid_pos - tick () operates in a sharp follow -up mode to the target corner
-// Accel_Speed - Tick () works in a smooth maintenance mode (with a given acceleration)
-// pid_Speed - Tick () works in the mode of maintaining speed on PID to the regulator
-VOID Setrunmode (am_runmode mode);
+// manual
+// IDLE RUN - Tick() does not control the motor. Can be used for debugging
+// ACCEL POS - tick() runs smoothly to target corner
+// PID POS - Tick() operates in a sharp path to the target corner
+// ACCEL SPEED - tick() operates in smooth speed maintenance mode (with a specified acceleration)
+// PID SPEED - tick() operates in the mode of maintaining the speed of the PID regulator
+void setRunMode(AM_runMode mode);
 
-// returns True if the shaft of the motor is blocked and the signal is supplied
-Bool ISBLOCKED ();
+// returns true if the motor shaft is blocked and the signal is given
+bool isBlocked();
 
-// Regulator PID coefficients
-// proportional - aggressiveness of management depends on it, you need to increase KP
-// with an increase in the load on the shaft, so that the regulator supplies a larger control PWM signal
-Float KP = 2.0;// (value by default)
+// regulator
+// proportional - the aggressiveness of management depends on it, you need to increase kp
+// when increasing the load on the shaft, so that the regulator gives a larger PWM control signal
+float kp = 2.0;		// (default)
 
 // Integral - allows you to level the error over time, has a cumulative effect
-Float Ki = 0.9;// (value by default)
+float ki = 0.9;		// (default)
 
-// differential.Allows you to slightly smooth out jerks, but with great meaning
-// itself becomes the cause of jerks and build -up systems!
-Float KD = 0.1;// (value by default)
+// differential. Allows you to smooth out the jerks a little, but with great importance
+// It itself becomes a cause of jerks and swaying of the system!
+float kd = 0.1;		// (default)
 
-// Install the zone of stopping the motor for the stabilization regimen (in silence 8)
-VOID SetStopzone (Int Zone);
+// set the stop zone of the motor for stabilization of the position (in silence). (8)
+void setStopZone(int zone);
 
-// set the limits of steps/degrees, outside which the motor will be hard to disable for safety.If by zero, there is no restriction (by the silence)
-VOID SETRANGE (LONG MIN, LONG MAX);
-VOID SETRANGEDEG (LONG MIN, LONG MAX);
+// set the limits of steps/degrees beyond which the motor will be rigidly disabled for safety. If there are zeros, there is no limit (by omission).
+void setRange(long min, long max);
+void setRangeDeg(long min, long max);
 
-Long Controlpos = 0;// for debugging
-`` `
+long controlPos = 0;	// debug
+```
 
-<a id="EXAMPLE"> </a>
+<a id="example"></a>
 ## Example
-`` `CPP
+```cpp
 /*
-An example of a motor management using a driver of a full bridge and a potentiometer
-For the regimes for the position and maintenance of speed
+	Пример управления мотором при помощи драйвера полного моста и потенциометра
+	Для режимов следования к позиции и удержания скорости
 */
-#include "Accelmotor.h"
-Accelmotor Motor (Driver2wire, 2, 3, High);
+#include "AccelMotor.h"
+AccelMotor motor(DRIVER2WIRE, 2, 3, HIGH);
 
-VOID setup () {
-  Serial.Begin (9600);
-  // I use the jga25 motor
-  // Reducer 1: 21.3
-  // Encoder 12 ticks for circulation
-  Motor.Setratio (21.3 * 12);
+void setup() {
+  Serial.begin(9600);
+  // Using the JGA25 engine
+  // reducer 1:21.3
+  // encoder 12 tics per turn
+  motor.setRatio(21.3 * 12);
 
-  // Integration period (in silence 20)
-  Motor.Setdt (30);// milliseconds
+  // Integration period (by omission 20)
+  motor.setDt(30);  // milliseconds
 
-  // Installation of maximum speed for the accel_pos mode
-  Motor.SetmaxSpeedDeg (600);// in degrees/s
-  //motor.SetmaxSpeed(400);// in ticks/sec
+  // Maximum speed setting for ACCEL POS
+  motor.setMaxSpeedDeg(600);  // degrees/sec
+  //motor.setMaxSpeed(400); // in ticks/sec
 
-  // Installation of acceleration for the accel_pos mode
-  Motor.Setaccelerationdeg (300);// in degrees/second
-  //motor.setacceleration(300);// in ticks
+  // Acceleration setting for ACCEL POS
+  motor.setAccelerationDeg(300);  // degrees/sec/sec
+  //motor.setAcceleration(300); // in ticks
 
-  // Minimum (according to the module) shim signal (at which the motor touches)
-  Motor.Setminduty (50);
+  // Minimum (module) PWM signal (at which the motor starts)
+  motor.setMinDuty(50);
 
-  // Regulator PID coefficients
-  Motor.kp = 3;// is responsible for the sharpness of regulation.
-  // with small values of the signal, there will be no signal at all, with too large ones - it will shake
+  // regulator
+  motor.kp = 3;   // It is responsible for the harshness of regulation.
+  // At small values, the signal will not be at all, at too large - it will shake.
 
-  Motor.ki = 0.2;// is responsible for correction of errors in the flowe
-  Motor.kd = 0.1;// is responsible for compensation for sharp changes
+  motor.ki = 0.2; // Responsible for correcting the error over time
+  motor.kd = 0.1; // Responsible for compensation for sudden changes
   
-  // Install the zone of stopping the motor for the stabilization mode of the position in ticks (according to the silence 8)
-  Motor.SetStopzone (10);
+  // set the stop zone of the motor for stabilization of the position in ticks (by default). (8)
+  motor.setStopZone(10);
 
-  Motor.Setrunmode (Accel_pos);
-  // IDLE_RUN - Tick () does not control the motor.Can be used for debugging
-  // Accel_pos - Tick () works in a smooth follow -up mode to the target corner
-  // pid_pos - tick () operates in a sharp follow -up mode to the target corner
-  // Accel_Speed - Tick () works in a smooth maintenance mode (with a given acceleration)
-  // pid_Speed - Tick () works in the mode of maintaining speed on PID to the regulator
+  motor.setRunMode(ACCEL_POS);
+  // IDLE RUN - Tick() does not control the motor. Can be used for debugging
+  // ACCEL POS - tick() runs smoothly to target corner
+  // PID POS - Tick() operates in a sharp path to the target corner
+  // ACCEL SPEED - tick() operates in smooth speed maintenance mode (with a specified acceleration)
+  // PID SPEED - tick() operates in the mode of maintaining the speed of the PID regulator
 }
 
-VOID loop () {
-  // Potentiometer on A0
-  // transform the value of --255 .. 255
-  Static Float Val;
-  val += (255 - analogread (0) / 2 - val) * 0.3;// Filter
+void loop() {
+  // potentiometer
+  // Turn the value to -255. 255
+  static float val;
+  val += (255 - analogRead(0) / 2 - val) * 0.3; // filter
 
-  // for pid_Speed/acceel_Speed
-  //motor.SettargetSpeeddeg(val*3);// set targeted speed in degrees/s
+  // PID SPEED/ACCEL SPEED mode
+  //motor.setTargetSpeedDeg(val*3) // set the target speed in degrees/sec
 
-  // for PID_POS/Accel_POS mode
-  Motor.Settargetdeg (val * 2);// set a new target angle in degrees
+  // PID POS/ACCEL POS
+  motor.setTargetDeg(val * 2);  // set a new target angle in degrees
 
-  // Mandatory function.Makes all calculations
-  // accepts the current value from the encoder or potentiometer
-  Motor.tick (Enctick (4));
+  // mandatory function. Doing all the calculations.
+  // takes the current value from an encoder or potentiometer
+  motor.tick(encTick(4));
 
   static uint32_t tmr = 0;
-  if (millis () - tmr> 100) {// Timer for 100ms for graphs
-    TMR += 100;
-    // debugging position (open Plotter)
-    Serial.print (motor.gettargetdeg ());
-    Serial.print (',');
-    Serial.print (motor.getduut ());
-    Serial.print (',');
-    Serial.println (Motor.getcurrentdeg ());
+  if (millis() - tmr > 100) {   // 100ms timer for charts
+    tmr += 100;
+    // Position debugging (open plotter)
+    Serial.print(motor.getTargetDeg());
+    Serial.print(',');
+    Serial.print(motor.getDuty());
+    Serial.print(',');
+    Serial.println(motor.getCurrentDeg());
 
     /*
-      // Speed debugging (open Plotter)
-      Serial.print (Motor.gettargetSpeeddeg ());
-      Serial.print (',');
-      Serial.print (motor.getduut ());
-      Serial.print (',');
-      Serial.println (Motor.getSpeeddeg ());
+      // speed debugging (open plotter)
+      Serial.print(motor.getTargetSpeedDeg());
+      Serial.print(',');
+      Serial.print(motor.getDuty());
+      Serial.print(',');
+      Serial.println(motor.getSpeedDeg());
     */
   }
 }
 
-// We read the encoder manually through DigitalRead ()
-LONG ENCTICK (Byte PIN) {
-  Static Bool Laststate;
-  Static Long Encounter = 0;
-  Bool Curstate = DigitalRead (PIN);// survey
-  IfState! = curstate) {// caught the change
-    Laststate = Curstate;
-    if (curstate) {// on the front
-      ENCCOUNTER += MOTOR.GETSTATE ();// remembered the turn
+// Read the encoder manually through digitalRead()
+long encTick(byte pin) {
+  static bool lastState;
+  static long encCounter = 0;
+  bool curState = digitalRead(pin);       // survey
+  if (lastState != curState) {            // catch
+    lastState = curState;
+    if (curState) {                       // frontward
+      encCounter += motor.getState();     // remember the turn
     }
   }
-  Return ENCCOUNTER;
+  return encCounter;
 }
-`` `
+```
 
-<a id="versions"> </a>
-## versions
-- V1.1 - the algorithm has been improved
-- V1.2 - Compatibility with ESP
-- V1.3 - small improvements and fixes
+<a id="versions"></a>
+## Versions
+- v1.1 - improved algorithm
+- v1.2 - compatibility with esp
+- v1.3 - small improvements and fixes
 
-<a id="feedback"> </a>
-## bugs and feedback
-Create ** Issue ** when you find the bugs, and better immediately write to the mail [alex@alexgyver.ru] (mailto: alex@alexgyver.ru)
-The library is open for refinement and your ** pull Request ** 'ow!
+<a id="feedback"></a>
+## Bugs and feedback
+If you find bugs, create **Issue**, or better write to the mail immediately.[alex@alexgyver.ru](mailto:alex@alexgyver.ru)  
+The library is open for revision and your **Pull Requests*!
 
-
-When reporting about bugs or incorrect work of the library, it is necessary to indicate:
-- The version of the library
-- What is MK used
+When reporting bugs or incorrect work of the library, it is necessary to specify:
+- Library version
+- What is used by the IC
 - SDK version (for ESP)
-- version of Arduino ide
-- whether the built -in examples work correctly, in which the functions and designs are used, leading to a bug in your code
-- what code has been loaded, what work was expected from it and how it works in reality
-- Ideally, attach the minimum code in which the bug is observed.Not a canvas of a thousand lines, but a minimum code
+- Arduino IDE version
+- Are embedded examples that use features and designs that cause bugs in your code working correctly?
+- What code was downloaded, what work was expected from it and how it works in reality
+- Ideally, attach the minimum code in which the bug is observed. Not a canvas of a thousand lines, but a minimum code.
